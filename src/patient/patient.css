@@ -1,0 +1,25 @@
+
+ .centered-patient img {
+    position: absolute;
+    right: 5%;
+    width: 600px;
+    height: 600px;
+    top:70px;
+    border-radius: 50%;
+    
+  }
+
+
+
+  .label {
+    cursor: pointer;
+    color: #555;
+    display: block;
+    padding: 10px;
+    margin: 3px;
+  }
+
+
+  .back-color {
+    background-color: cornflowerblue;
+  }
