@@ -87,7 +87,7 @@ const [passwordEmp, setPasswordEmp] = useState("");
 
         if(Response.data.msg =="Successfully updated") {
             var id=Response.data.msg;
-          window.location.href = `http://localhost:3000/UpdateEmp?id=${id}`
+          window.location.href = `https://znts-frontend.herokuapp.com/UpdateEmp?id=${id}`
         }
 
         console.log(Response.data.msg);

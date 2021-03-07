@@ -60,7 +60,7 @@ const options = [
 
           //console.log(id);
 
-          window.location.href = `http://localhost:3000/login?id=${id}`;
+          window.location.href = `https://znts-frontend.herokuapp.com/login?id=${id}`;
       //return render(<FormPage />);
 
         }

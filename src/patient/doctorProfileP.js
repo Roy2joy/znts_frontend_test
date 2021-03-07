@@ -135,7 +135,7 @@ for(var i=0;i<7;i++) {
           </div>
           <br />
           <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-          <MDBBtn href = {`http://localhost:3000/Appointment?id=${IdFromURL}&pid=${PIdFromURL}`}>Make Appointment</MDBBtn>
+          <MDBBtn href = {`https://znts-frontend.herokuapp.com/Appointment?id=${IdFromURL}&pid=${PIdFromURL}`}>Make Appointment</MDBBtn>
           </div>
           <br />
           <br />

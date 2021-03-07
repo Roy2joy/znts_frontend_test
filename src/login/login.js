@@ -45,7 +45,7 @@ console.log(IdFromURL);
           setloginStatus(Response.data.msg);
         }
         if(Response.data.msg == "Password matched") {
-          window.location.href = `http://localhost:3000/Sidenav_login?id=${loginID}`;
+          window.location.href = `https://znts-frontend.herokuapp.com/Sidenav_login?id=${loginID}`;
         }
         else {
           setloginStatus(Response.data.msg);

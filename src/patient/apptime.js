@@ -151,7 +151,7 @@ useEffect(() => {
           .then((Response) => {
                  //setFeeAppointment(Response.data.FeeBalance);
                  var id="Appointment Booked."
-                 window.location.href = `http://localhost:3000/login?id=${id}`;
+                 window.location.href = `https://znts-frontend.herokuapp.com/login?id=${id}`;
 
          })
         }

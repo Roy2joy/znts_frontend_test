@@ -45,7 +45,7 @@ const RIdFromURL = params.get('rid');
           setloginStatus(Response.data.msg);
         }
         if(Response.data.msg == "Password matched") {
-         window.location.href = `http://localhost:3000/doctorAppointment?id=${loginID}`;
+         window.location.href = `https://znts-frontend.herokuapp.com/doctorAppointment?id=${loginID}`;
         }
         else {
           setloginStatus(Response.data.msg);

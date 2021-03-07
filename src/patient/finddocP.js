@@ -37,7 +37,7 @@ function DepartPageP (props){
 
  const Doctor_Info = (Id) => {
   var id;
-  window.location.href = `http://localhost:3000/doctorP?id=${Id}`;
+  window.location.href = `https://znts-frontend.herokuapp.com/doctorP?id=${Id}`;
   }
     
 

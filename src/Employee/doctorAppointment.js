@@ -39,7 +39,7 @@ function CheckNext (props){
     .then(json=> { 
       
       if(json.msg == "No Records") {
-        window.location.href = `http://localhost:3000/NoRecord`;
+        window.location.href = `https://znts-frontend.herokuapp.com/NoRecord`;
       }
       else{
      setNameDep(json.Data);
@@ -119,7 +119,7 @@ function CheckNext (props){
     })
       .then((Response) => {
                 if(Response.data.msg =="Appointment deactivate") {
-                    window.location.href = `http://localhost:3000/Emp_doctor`;
+                    window.location.href = `https://znts-frontend.herokuapp.com/Emp_doctor`;
                 }
 
       })

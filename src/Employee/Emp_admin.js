@@ -42,7 +42,7 @@ const IdFromURL = params.get('id');
           setloginStatus(Response.data.msg);
         }
         if(Response.data.msg == "Password matched") {
-         window.location.href = "http://localhost:3000/UpdateEmp";
+         window.location.href = "https://znts-frontend.herokuapp.com/UpdateEmp";
         }
         else {
           setloginStatus(Response.data.msg);

@@ -353,7 +353,7 @@ return (
           <MDBInput label="Type your Date" icon="envelope" onChange={(e) => {setSendDate(e.target.value)}}/>
         </div>
         <div className="text-center">
-          <MDBBtn href={`http://localhost:3000/apptime?id=${IdFromURL}&pid=${PIdFromURL}&date=${sendDate}`}>Submit</MDBBtn>
+          <MDBBtn href={`https://znts-frontend.herokuapp.com/apptime?id=${IdFromURL}&pid=${PIdFromURL}&date=${sendDate}`}>Submit</MDBBtn>
         </div>
       </form>
         </MDBCardBody>

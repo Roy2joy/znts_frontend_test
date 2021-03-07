@@ -40,7 +40,7 @@ const [nameDoctor, setNameDoctor] = useState([]);
 
   const Doctor_Info = (Id) => {
     var id;
-    window.location.href = `http://localhost:3000/doctorProfileP?id=${Id}`;
+    window.location.href = `https://znts-frontend.herokuapp.com/doctorProfileP?id=${Id}`;
     }
 
  
@@ -66,7 +66,7 @@ const [nameDoctor, setNameDoctor] = useState([]);
             <h3>
              Specialists: {item.Speciality}
             </h3>
-           <MDBBtn href = {`http://localhost:3000/doctorProfileP?id=${item.EmpId}&pid=${PIdFromURL}`}>View Profile</MDBBtn>
+           <MDBBtn href = {`https://znts-frontend.herokuapp.com/doctorProfileP?id=${item.EmpId}&pid=${PIdFromURL}`}>View Profile</MDBBtn>
           </div>
         ))
       }

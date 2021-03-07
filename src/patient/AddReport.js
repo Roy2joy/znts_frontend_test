@@ -49,7 +49,7 @@ const [adviceReg, setadvice] = useState('');
 
         var rid;
 
-         window.location.href = `http://localhost:3000/Emp_Doctor?rid=${id}`;
+         window.location.href = `https://znts-frontend.herokuapp.com/Emp_Doctor?rid=${id}`;
       //return render(<FormPage />);
 
         }
