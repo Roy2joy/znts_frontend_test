@@ -11,6 +11,8 @@ import DoctorPageP from "./doctorP"
 import FullReport from "./fullReport"
 import {createBrowserHistory} from 'history';
 import { render } from "@testing-library/react";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -27,7 +29,7 @@ function ReportPage(props){
   const [nameDep, setNameDep] = useState([]);
   useEffect(() => {
 
-    fetch(`http://localhost:3001/get/viewMedicalReport?id=${IdFromURL}`)
+    fetch(getBackendConnection()+`get/viewMedicalReport?id=${IdFromURL}`)
     .then(Response => Response.json()) 
     .then(json=> { 
      setNameDep(json.Data);
@@ -46,17 +48,27 @@ function ReportPage(props){
 
         {
           nameDep.map((item,index)=>(
-            <div key={index}  style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-              <h3>
+           /* ///
+            <div key={index}  className="deptListContainer">
+                <span className="deptListContainerItems"> {item.DeptID}  </span>
+                <span className="deptListContainerItems"> {item.Name} </span>
+                <Link className="deptListContainerItems" to={`DoctorPageP?id=${item.DeptID}&pid=${IdFromURL}`}><MDBBtn>View Doctors</MDBBtn></Link>
+            </div>
+            ///*/
+            
+
+            <div key={index} className="deptListContainer" >
+              <span className="deptListContainerItems">
                RepID : {item.RepID}
-              </h3>
-              <h3>
+              </span>
+              <span className="deptListContainerItems">
                Date : {item.Date}
-              </h3>
-             <h3>
-             Examined by : {item.ExaminedBy}
-                </h3>
-                <MDBBtn href = {`http://localhost:3000/fullReport?id=${item.RepID}`}>View Report</MDBBtn>
+              </span>
+              <span className="deptListContainerItems">
+              Examined by : {item.ExaminedBy}
+              </span>
+             
+                <MDBBtn href = {getFrontendConnection()+`fullReport?id=${item.RepID}`}>View Report</MDBBtn>
             </div>
           ))
         }

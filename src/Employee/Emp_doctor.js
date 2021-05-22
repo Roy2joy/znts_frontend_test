@@ -13,6 +13,8 @@ import logo from "./user.png";
 import { Link } from "react-router-dom";
 import {Route,Router,Switch} from "react-router-dom";
 import {createBrowserHistory} from 'history';
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -35,7 +37,7 @@ const RIdFromURL = params.get('rid');
   const login = () => {
     console.log('Login function called');
     console.log('Login function called');
-    Axios.post("https://znts-backend.herokuapp.com/posts/loginDoctor", {
+    Axios.post(getBackendConnection()+"posts/loginDoctor", {
       ID: loginID,
       Password: loginPass,
     })
@@ -45,7 +47,7 @@ const RIdFromURL = params.get('rid');
           setloginStatus(Response.data.msg);
         }
         if(Response.data.msg == "Password matched") {
-         window.location.href = `https://znts-frontend.herokuapp.com/doctorAppointment?id=${loginID}`;
+         window.location.href = getFrontendConnection()+`doctorAppointment?id=${loginID}`;
         }
         else {
           setloginStatus(Response.data.msg);
@@ -75,9 +77,9 @@ return (
         </div>
         <div className="text-center">
           <MDBBtn onClick={login}>Login</MDBBtn>
-          <h2 style={{color: 'blue'}}>OR</h2>
-          <br />
-          <Link to="/AddReport"><MDBBtn >Add Patient Report.</MDBBtn></Link>
+          {/* <h2 style={{color: 'blue'}}>OR</h2>
+          <br /> */}
+          {/* <Link to="/AddReport"><MDBBtn >Add Patient Report.</MDBBtn></Link> */}
         </div>
         </div>
         <h3 style={{color: 'red' , textAlign:'center'}}>{loginStatus}</h3>

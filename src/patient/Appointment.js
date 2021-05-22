@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import {Route,Router,Switch} from "react-router-dom";
 import {createBrowserHistory} from 'history';
 import AppointmentTime from "./apptime"
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -97,7 +99,7 @@ console.log("Day 3: "+day3);
 useEffect(() => {
 
 
-    Axios.post("https://znts-backend.herokuapp.com/posts/makeAppointment", {
+    Axios.post(getBackendConnection()+"posts/makeAppointment", {
       ID: IdFromURL,
       //Password: loginPass,
     })
@@ -353,7 +355,7 @@ return (
           <MDBInput label="Type your Date" icon="envelope" onChange={(e) => {setSendDate(e.target.value)}}/>
         </div>
         <div className="text-center">
-          <MDBBtn href={`https://znts-frontend.herokuapp.com/apptime?id=${IdFromURL}&pid=${PIdFromURL}&date=${sendDate}`}>Submit</MDBBtn>
+          <MDBBtn href={getFrontendConnection()+`apptime?id=${IdFromURL}&pid=${PIdFromURL}&date=${sendDate}`}>Submit</MDBBtn>
         </div>
       </form>
         </MDBCardBody>

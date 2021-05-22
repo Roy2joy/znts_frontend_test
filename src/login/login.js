@@ -14,6 +14,8 @@ import RegisterPage from "../register/register"
 import {Route,Router,Switch} from "react-router-dom";
 import {createBrowserHistory} from 'history';
 import Sidenav_login from "../patient/main";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -35,7 +37,7 @@ console.log(IdFromURL);
 
   const login = () => {
     console.log('Login function called');
-    Axios.post("https://znts-backend.herokuapp.com/posts/login", {
+    Axios.post(getBackendConnection()+"posts/login", {
       ID: loginID,
       Password: loginPass,
     })
@@ -45,7 +47,7 @@ console.log(IdFromURL);
           setloginStatus(Response.data.msg);
         }
         if(Response.data.msg == "Password matched") {
-          window.location.href = `https://znts-frontend.herokuapp.com/Sidenav_login?id=${loginID}`;
+          window.location.href = getFrontendConnection()+`Sidenav_login?id=${loginID}`;
         }
         else {
           setloginStatus(Response.data.msg);

@@ -12,6 +12,8 @@ import DoctorPageP from "./doctorP"
 import DepartPageP from "./finddocP"
 import AppointmentDate from "./Appointment"
 import { render } from "@testing-library/react";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -69,7 +71,7 @@ for(var i=0;i<7;i++) {
 
     useEffect(() =>{
 
-      Axios.post("https://znts-backend.herokuapp.com/posts/detailOfDoctor", {
+      Axios.post(getBackendConnection()+"posts/detailOfDoctor", {
         ID: IdFromURL,
         //Password: loginPass,
       })
@@ -99,47 +101,46 @@ for(var i=0;i<7;i++) {
   
 
   return (
-    <div style={{backgroundColor:"skyblue" ,height:"100%",width:"100%"}}>  
+    <div style={{backgroundColor:"skyblue" ,height:"778px",width:"100%"}}>  
       <Link to="/"><MDBBtn >Home</MDBBtn></Link>
-      <h2 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Doctor Profile:</h2>
+      <h2 className="deptBanner"> <span className="deptContent2">Doctor Profile: -</span> </h2>
       <br />
 
       {
-        <div>
-          <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h2>
-             ID : {doctorID}
-            </h2>
+
+          <div className="profileBase">
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">ID</span>
+               : {doctorID}
             </div>
-            <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h2>
-             Qualification : {doctorQualification}
-            </h2>
+            <div className="profileBaseContent">
+            <span className="profileBaseContentSpan1">Qualification</span>
+             : {doctorQualification}
             </div>
-            <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h2>
-             Certificate : {doctorCertificate}
-            </h2>
+            <div className="profileBaseContent">
+            <span className="profileBaseContentSpan1">Certificate</span>
+             : {doctorCertificate}
             </div>
-            <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h2>
-              Experience : {doctorExperience}
-            </h2>
+            <div className="profileBaseContent">
+            <span className="profileBaseContentSpan1">Experience</span>
+               : {doctorExperience}
             </div>
-             <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h2>Timing : {doctorTiming}</h2>
-           </div>
-           <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h2>Active Days : {Day(ActiveDay[0])} , {Day(ActiveDay[2])}
-            </h2>
+            <div className="profileBaseContent">
+            <span className="profileBaseContentSpan1">Timing</span>
+
+               : {doctorTiming}
+            </div>
+            <div className="profileBaseContent">
+            <span className="profileBaseContentSpan1">Active Days</span>
+               : {Day(ActiveDay[0])} , {Day(ActiveDay[2])}
+            </div>
+            <div style={{marginLeft:"22px",marginTop:"40px",display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
+            <MDBBtn href = {getFrontendConnection()+`Appointment?id=${IdFromURL}&pid=${PIdFromURL}`}>Make Appointment</MDBBtn>
+            </div>
           </div>
-          <br />
-          <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-          <MDBBtn href = {`https://znts-frontend.herokuapp.com/Appointment?id=${IdFromURL}&pid=${PIdFromURL}`}>Make Appointment</MDBBtn>
-          </div>
-          <br />
-          <br />
-          </div>
+            
+
+        
         
       }
       

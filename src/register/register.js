@@ -12,6 +12,8 @@ import logo from "./user.png";
 import Select from 'react-select';
 import {createBrowserHistory} from 'history';
 import { render } from "@testing-library/react";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -38,7 +40,7 @@ const options = [
 
   const Register = () => {
     console.log('Registration function called');
-    Axios.post("https://znts-backend.herokuapp.com/posts/makeRegisteration", {
+    Axios.post(getBackendConnection()+"posts/makeRegisteration", {
       Name : nameReg,   
        Age : ageReg,
        Gender : genderReg, 
@@ -60,7 +62,7 @@ const options = [
 
           //console.log(id);
 
-          window.location.href = `https://znts-frontend.herokuapp.com/login?id=${id}`;
+          window.location.href =getFrontendConnection()+ `login?id=${id}`;
       //return render(<FormPage />);
 
         }

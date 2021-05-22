@@ -10,6 +10,8 @@ import Select from 'react-select';
 import DoctorPageP from "./doctorP"
 import {createBrowserHistory} from 'history';
 import { render } from "@testing-library/react";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -26,7 +28,7 @@ function DepartPageP (props){
   const [nameDep, setNameDep] = useState([]);
   useEffect(() => {
 
-    fetch("https://znts-backend.herokuapp.com/get/findDoctor")
+    fetch(getBackendConnection()+"get/findDoctor")
     .then(Response => Response.json()) 
     .then(json=> { 
      setNameDep(json);
@@ -37,27 +39,22 @@ function DepartPageP (props){
 
  const Doctor_Info = (Id) => {
   var id;
-  window.location.href = `https://znts-frontend.herokuapp.com/doctorP?id=${Id}`;
+  window.location.href = getFrontendConnection()+`doctorP?id=${Id}`;
   }
     
 
     return (
       <div style={{backgroundColor:"skyblue" ,height:"100%",width:"100%"}}>   
         <Link to="/"><MDBBtn >Home</MDBBtn></Link>
-        <h2 style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>DEPARTMENTS:</h2>
+        <h2 className="deptBanner"> <span className="deptContent"> DEPARTMENTS: </span> </h2>
         <br />
 
         {
           nameDep.map((item,index)=>(
-            <div key={index}  style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-              <h3>
-                {item.DeptID}
-              </h3>
-              <h3>
-                {item.Name}
-              </h3>
-              
-              <Link to={`DoctorPageP?id=${item.DeptID}&pid=${IdFromURL}`}><MDBBtn>View Doctors</MDBBtn></Link>
+            <div key={index}  className="deptListContainer">
+                <span className="deptListContainerItems"> {item.DeptID}  </span>
+                <span className="deptListContainerItems"> {item.Name} </span>
+                <Link className="deptListContainerItems" to={`DoctorPageP?id=${item.DeptID}&pid=${IdFromURL}`}><MDBBtn>View Doctors</MDBBtn></Link>
             </div>
           ))
         }

@@ -12,6 +12,8 @@ import logo from "./user.png";
 import { Link } from "react-router-dom";
 import {Route,Router,Switch} from "react-router-dom";
 import {createBrowserHistory} from 'history';
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -34,12 +36,12 @@ function CheckNext (props){
 
   useEffect(() => {
 
-    fetch(`https://znts-backend.herokuapp.com/get/checkDoctorAppointment?id=${IdFromURL}`)
+    fetch(getBackendConnection()+`get/checkDoctorAppointment?id=${IdFromURL}`)
     .then(Response => Response.json()) 
     .then(json=> { 
       
       if(json.msg == "No Records") {
-        window.location.href = `https://znts-frontend.herokuapp.com/NoRecord`;
+        window.location.href = getFrontendConnection()+`NoRecord`;
       }
       else{
      setNameDep(json.Data);
@@ -65,14 +67,14 @@ function CheckNext (props){
     <div style={{backgroundColor:"skyblue" ,height:"100%",width:"100%"}}>   
       <Link to="/"><MDBBtn >Home</MDBBtn></Link>
       <Link to="/Emp_doctor"><MDBBtn >Go Back</MDBBtn></Link>
+      <Link to="/AddReport"><MDBBtn >Add Patient Report.</MDBBtn></Link>
       <h2 style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>Appointments Due:</h2>
-
     <h3>{status}</h3>
 
     <div>
       {
         nameDep.map((item,index)=>(
-          <div key={index}  style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
+          <div key={index}  style={{marginBottom:"20px", backgroundColor:"whitesmoke",display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
             <h5>
              DocID: {item.DocID}
             </h5>
@@ -89,7 +91,7 @@ function CheckNext (props){
               PatID: {item.PatID}
             </h5>
             <h5>
-              Symptoms:{item.Symptoms}
+              Symptoms: NILL {item.Symptoms}
             </h5>
             <h5>
              AppID: {item.AppID}
@@ -113,13 +115,13 @@ function CheckNext (props){
 
   function AppFunc(ID) {
 
-    Axios.post("https://znts-backend.herokuapp.com/posts/completeAppointment", {
+    Axios.post(getBackendConnection()+"posts/completeAppointment", {
       AppID: ID
       //Password: loginPass,
     })
       .then((Response) => {
                 if(Response.data.msg =="Appointment deactivate") {
-                    window.location.href = `https://znts-frontend.herokuapp.com/Emp_doctor`;
+                    window.location.href =getFrontendConnection()+ `Emp_doctor`;
                 }
 
       })

@@ -13,6 +13,8 @@ import Select from 'react-select';
 import {createBrowserHistory} from 'history';
 import { render } from "@testing-library/react";
 import UpdateEmp from "./updateEmp";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -43,7 +45,7 @@ const [passwordEmp, setPasswordEmp] = useState("");
 
    
  useEffect(() =>{
-  Axios.post("https://znts-backend.herokuapp.com/posts/getEmployeeDetails", {
+  Axios.post(getBackendConnection()+"posts/getEmployeeDetails", {
     ID: IdFromURL,
     //Password: loginPass,
   })
@@ -70,7 +72,7 @@ const [passwordEmp, setPasswordEmp] = useState("");
       console.log("Update Function Called.");
 
 
-    Axios.post("https://znts-backend.herokuapp.com/posts/updateEmployee", {
+    Axios.post(getBackendConnection()+"posts/updateEmployee", {
     
     EmpId: IdFromURL,
     Name:nameEmp,
@@ -87,7 +89,7 @@ const [passwordEmp, setPasswordEmp] = useState("");
 
         if(Response.data.msg =="Successfully updated") {
             var id=Response.data.msg;
-          window.location.href = `https://znts-frontend.herokuapp.com/UpdateEmp?id=${id}`
+          window.location.href = getFrontendConnection()+`UpdateEmp?id=${id}`
         }
 
         console.log(Response.data.msg);

@@ -14,6 +14,8 @@ import logo from "./user.png";
 import { Link } from "react-router-dom";
 import {Route,Router,Switch} from "react-router-dom";
 import {createBrowserHistory} from 'history';
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -33,7 +35,7 @@ const IdFromURL = params.get('id');
 
   const login = () => {
     console.log('Login function called');
-    Axios.post("http://localhost:3001/posts/loginAdmin", {
+    Axios.post(getBackendConnection()+"posts/loginAdmin", {
       ID: loginID,
       Password: loginPass,
     })
@@ -45,7 +47,7 @@ const IdFromURL = params.get('id');
         if(Response.data.msg == "Password matched") {
         // window.location.href = "http://localhost:3000/DepartInfo";
 
-        window.location.href = `http://localhost:3000/EmpPage?id=${loginID}`
+        window.location.href = getFrontendConnection()+`EmpPage?id=${loginID}`
       }
         else {
           setloginStatus(Response.data.msg);
@@ -61,7 +63,7 @@ return (
             <Link to="/"><MDBBtn >Home</MDBBtn></Link>
             <Link to="/Emp_admin"><MDBBtn >Go Back</MDBBtn></Link>
             <br />
-            <h2 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Update Employee</h2>
+            <h2 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Update Employee/Register Employee</h2>
 
 <MDBContainer className={`card-display`}>
   <MDBRow md="4">
@@ -74,7 +76,15 @@ return (
           <MDBInput label="Type your ID" icon="envelope"  onChange={(e) => {setloginID(e.target.value)}} />
         </div>
         <div className="text-center">
-          <MDBBtn href = {`http://localhost:3000/EmpData?id=${loginID}`}>Submit</MDBBtn>
+          <MDBBtn href = {getFrontendConnection()+`EmpData?id=${loginID}`}>Update</MDBBtn>
+        </div>
+        <br />
+        <br />
+        <h3 className="text-center" style={{color: 'Green'}}>OR</h3>
+        <br />
+        <br />
+        <div className="text-center">
+          <MDBBtn href = {getFrontendConnection()+`EmpData?id=${loginID}`}>Register</MDBBtn>
         </div>
         <h3 style={{color: 'red' , textAlign:'center'}}>{loginStatus}</h3>
         <h3 style={{color: 'Green' , textAlign:'center'}}>{IdFromURL}</h3>

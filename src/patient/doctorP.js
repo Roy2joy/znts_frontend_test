@@ -11,6 +11,8 @@ import {createBrowserHistory} from 'history';
 import DepartPageP from "./finddocP"
 import DoctorViewP from "./doctorProfileP"
 import { render } from "@testing-library/react";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -30,7 +32,7 @@ const [nameDoctor, setNameDoctor] = useState([]);
    //console.log(props.item.DeptID);
    useEffect(() => {
 
-    fetch(`https://znts-backend.herokuapp.com/get/doctorOfDept?id=${IdFromURL}`)
+    fetch(getBackendConnection()+`get/doctorOfDept?id=${IdFromURL}`)
     .then(Response => Response.json()) 
     .then(json=> { 
      setNameDoctor(json);
@@ -40,33 +42,30 @@ const [nameDoctor, setNameDoctor] = useState([]);
 
   const Doctor_Info = (Id) => {
     var id;
-    window.location.href = `https://znts-frontend.herokuapp.com/doctorProfileP?id=${Id}`;
+    window.location.href = getFrontendConnection()+`doctorProfileP?id=${Id}`;
     }
 
  
 
 
   return (
-    <div style={{backgroundColor:"skyblue" ,height:"100%",width:"100%"}}>    
+    <div style={{backgroundColor:"skyblue" ,height:"1000px",width:"100%"}}>    
       <Link to="/"><MDBBtn >Home</MDBBtn></Link>   
       <Link to="/DepartInfo"><MDBBtn >Go Back</MDBBtn></Link>
-      <h1 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Doctors:</h1>
+      <h1 className="deptBanner"> <span className="deptContent">Doctors:</span></h1>
       <br />
 
       {
         nameDoctor.map((item,index)=>(
-          <div key={index}  style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
+          <div key={index}  className="deptListContainer">
             
-            <h3>
-              ID :{item.EmpId}
-            </h3>
-            <h3>
-              Name :{item.Name}
-            </h3>
-            <h3>
-             Specialists: {item.Speciality}
-            </h3>
-           <MDBBtn href = {`https://znts-frontend.herokuapp.com/doctorProfileP?id=${item.EmpId}&pid=${PIdFromURL}`}>View Profile</MDBBtn>
+            <span className="deptListContainerItems2"> ID :{item.EmpId}</span>
+
+            <span className="deptListContainerItems2">Name :{item.Name}</span>
+
+            <span className="deptListContainerItems2">Specialists: {item.Speciality}</span>
+            
+           <MDBBtn href = {getFrontendConnection()+`doctorProfileP?id=${item.EmpId}&pid=${PIdFromURL}`}>View Profile</MDBBtn>
           </div>
         ))
       }

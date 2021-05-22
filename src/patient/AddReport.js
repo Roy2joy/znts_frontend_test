@@ -13,6 +13,8 @@ import Select from 'react-select';
 import Emp_Doctor from "../Employee/Emp_doctor"
 import {createBrowserHistory} from 'history';
 import { render } from "@testing-library/react";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -32,7 +34,7 @@ const [adviceReg, setadvice] = useState('');
 
   const Register = () => {
     
-    Axios.post("https://znts-backend.herokuapp.com/posts/updatePatientHistory", {
+    Axios.post(getBackendConnection()+"posts/updatePatientHistory", {
         PatID : pidReg,   
        DocID : didReg,
        Date : dateReg, 
@@ -49,7 +51,7 @@ const [adviceReg, setadvice] = useState('');
 
         var rid;
 
-         window.location.href = `https://znts-frontend.herokuapp.com/Emp_Doctor?rid=${id}`;
+         window.location.href = getFrontendConnection()+`Emp_Doctor?rid=${id}`;
       //return render(<FormPage />);
 
         }

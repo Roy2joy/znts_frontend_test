@@ -11,6 +11,8 @@ import {createBrowserHistory} from 'history';
 import ReportPage from "./Report"
 import DepartPage from "../finddoc"
 import { render } from "@testing-library/react";
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -45,7 +47,7 @@ const [age, setAge] = useState("");
 
  
 
-    Axios.post("https://znts-backend.herokuapp.com/posts/detailReport", {
+    Axios.post(getBackendConnection()+"posts/detailReport", {
         RepID: IdFromURL,
         //Password: loginPass,
       })
@@ -63,58 +65,75 @@ const [age, setAge] = useState("");
             setPerscription(Response.data.Records.Prescription);
             setAdvice(Response.data.Records.Advice);
            // console.log(Response);
+          
         
        })
+
+       if(Presciption===""){
+        setPerscription("-")
+       }
+       if(Advice===""){
+        setAdvice("-")
+       }
 
   
   
 
   return (
-    <div style={{backgroundColor:"skyblue" ,height:"100%",width:"100%"}}>  
+    <div style={{backgroundColor:"skyblue" ,height:"1300px",width:"100%"}}>  
       <Link to="/"><MDBBtn >Home</MDBBtn></Link>
-      <h2 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Doctor Profile:</h2>
-      <br />
-        <h1 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Biodata :</h1>
-          <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h4>
-             Name: {nameR}
-            </h4>
-            <h4>
-             Age: {age}
-            </h4>
-            <h4>
-             Gender: {gender}
-            </h4>
-            <h4>
-              Contact Number:{contact}
-            </h4>
-            <br />
-          </div>
-          <br />
-          <h1 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Records:</h1>
-          <div style={{display:"flex",flexDirection:"row",alignItems:"center",justifyContent:"space-around"}}>
-            <h4>
-             PatID: {patid}
-            </h4>
-            <h4>
-             DocID: {docid}
-            </h4>
-            <h4>
-             ExaminedBy: {Examined}
-            </h4>
-            <h4>
-              Date of Report :{dateR}
-            </h4>
-            <h4>
-              Diagnosis :{DiagnosisR}
-            </h4>
-            <h4>
-              Presciption :{Presciption}
-            </h4>
-            <h4>
-              Advice :{Advice}
-            </h4>
-            <br />
+      <h2 className="deptBanner"> <span className="deptContent2">Medical Report: -</span> </h2>
+          
+          
+          <div className="profileBase">
+            <h1 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Biodata :</h1>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Name</span>
+                : {nameR}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Age</span>
+                : {age}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Gender</span>
+              : {gender}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Contact</span>
+              : {contact}
+            </div>      
+
+
+            <h1 style={{display:"flex",alignItems:"center",justifyContent:"center"}}>Records:</h1>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">PatID</span>
+                : {patid}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">DocID</span>
+                : {docid}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">ExaminedBy</span>
+              : {Examined}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Date of Report</span>
+              : {dateR}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Diagnosis</span>
+              : {DiagnosisR}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Presciption</span>
+              : {Presciption}
+            </div>
+            <div className="profileBaseContent">
+              <span className="profileBaseContentSpan1">Advice</span>
+              :    {Advice}
+            </div>
           </div>
       
   </div>

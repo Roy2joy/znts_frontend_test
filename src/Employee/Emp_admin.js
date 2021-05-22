@@ -13,6 +13,8 @@ import logo from "./user.png";
 import { Link } from "react-router-dom";
 import {Route,Router,Switch} from "react-router-dom";
 import {createBrowserHistory} from 'history';
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -32,7 +34,7 @@ const IdFromURL = params.get('id');
 
   const login = () => {
     console.log('Login function called');
-    Axios.post("https://znts-backend.herokuapp.com/posts/loginAdmin", {
+    Axios.post(getBackendConnection()+"posts/loginAdmin", {
       ID: loginID,
       Password: loginPass,
     })
@@ -42,7 +44,7 @@ const IdFromURL = params.get('id');
           setloginStatus(Response.data.msg);
         }
         if(Response.data.msg == "Password matched") {
-         window.location.href = "https://znts-frontend.herokuapp.com/UpdateEmp";
+         window.location.href = getFrontendConnection()+"UpdateEmp";
         }
         else {
           setloginStatus(Response.data.msg);

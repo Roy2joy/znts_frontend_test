@@ -20,7 +20,7 @@ function Sidenav_Emp (props) {
         <div className="sidenav">
         <Link to="/" >Home</Link>
              <Link to="/Emp_admin" >Admin Portal</Link>
-            <Link to="/Emp_doctor" >Doctor Portal</Link>
+             <Link to="/Emp_doctor" >Doctor Portal</Link>
         </div>
 
 

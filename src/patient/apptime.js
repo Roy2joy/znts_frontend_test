@@ -10,6 +10,8 @@ import { Link } from "react-router-dom";
 import {Route,Router,Switch} from "react-router-dom";
 import Sidenav_login from "./main"
 import {createBrowserHistory} from 'history';
+import getBackendConnection from "../Connection";
+import getFrontendConnection from "./Connection";
 const history = createBrowserHistory({basename : `${process.env.PUBLIC_URL}`});
 
 
@@ -48,7 +50,7 @@ console.log(DateFromURL);
      
 useEffect(() => {
   
-    Axios.post("https://znts-backend.herokuapp.com/posts/requestTime", {
+    Axios.post(getBackendConnection()+"posts/requestTime", {
       ID: IdFromURL,
      Date: DateFromURL,
     })
@@ -98,7 +100,7 @@ useEffect(() => {
      })
 
 
-    Axios.post("https://znts-backend.herokuapp.com/posts/confirmAppointment", {
+    Axios.post(getBackendConnection()+"posts/confirmAppointment", {
       DocID: IdFromURL,
       ID : PIdFromURL,
      Date: DateFromURL,
@@ -144,14 +146,14 @@ useEffect(() => {
      
 
         const Pay = () => {
-            Axios.post("https://znts-backend.herokuapp.com/posts/makePAyment", {
+            Axios.post(getBackendConnection()+"posts/makePAyment", {
           AppID: IDAppointment,
           Amount:feeAppointment
         })
           .then((Response) => {
                  //setFeeAppointment(Response.data.FeeBalance);
                  var id="Appointment Booked."
-                 window.location.href = `https://znts-frontend.herokuapp.com/login?id=${id}`;
+                 window.location.href = getFrontendConnection()+`login?id=${id}`;
 
          })
         }
